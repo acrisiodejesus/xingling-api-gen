@@ -141,11 +141,8 @@ export default function DashboardPage() {
           <div className="max-w-4xl mx-auto">
             <Alert variant="destructive">
               <AlertCircle className="h-4 w-4" />
-              <AlertTitle>Firebase não configurado</AlertTitle>
-              <AlertDescription>
-                As variáveis de ambiente do Firebase não estão configuradas. Por
-                favor, configure o Firebase para usar o dashboard.
-              </AlertDescription>
+              <AlertTitle>Erro</AlertTitle>
+              <AlertDescription>Contacte o suporte!</AlertDescription>
             </Alert>
           </div>
         </main>
