@@ -112,13 +112,19 @@ export default function DashboardPage() {
   };
 
   const handleDelete = async (apiId: string) => {
-    if (!db) return;
+    if (!user) return;
 
+    setLoading(true);
     try {
-      await deleteDoc(doc(db, "apis", apiId));
+      const res = await fetch(`/api/apis?userId=${user.uid}&apiId=${apiId}`, {
+        method: "DELETE",
+      });
+      if (!res.ok) throw new Error("Erro ao deletar API");
       setApis(apis.filter((api) => api.id !== apiId));
     } catch (error) {
       console.error("Error deleting API:", error);
+    } finally {
+      setLoading(false);
     }
   };
 

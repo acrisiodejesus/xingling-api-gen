@@ -1,22 +1,26 @@
-"use client"
+"use client";
 
-import { useAuth } from "@/lib/auth-context"
-import { Button } from "@/components/ui/button"
-import { Database, LogOut, Languages } from "lucide-react"
-import { useTranslations, useLocale } from "next-intl"
-import { Link, useRouter, usePathname } from "@/i18n/routing"
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
+import { useAuth } from "@/lib/auth-context";
+import { Button } from "@/components/ui/button";
+import { Database, LogOut, Languages } from "lucide-react";
+import { Link, useRouter, usePathname } from "@/i18n/routing";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 export function Header() {
-  const { user, signOut } = useAuth()
-  const t = useTranslations("header")
-  const locale = useLocale()
-  const router = useRouter()
-  const pathname = usePathname()
+  const { user, signOut } = useAuth();
+  const t = useTranslations("header");
+  const locale = useLocale();
+  const router = useRouter();
+  const pathname = usePathname();
 
   const switchLocale = (newLocale: "en" | "pt") => {
-    router.replace(pathname, { locale: newLocale })
-  }
+    router.replace(pathname, { locale: newLocale });
+  };
 
   return (
     <header className="border-b border-border bg-card">
@@ -34,8 +38,12 @@ export function Header() {
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
-              <DropdownMenuItem onClick={() => switchLocale("pt")}>🇧🇷 Português</DropdownMenuItem>
-              <DropdownMenuItem onClick={() => switchLocale("en")}>🇺🇸 English</DropdownMenuItem>
+              <DropdownMenuItem onClick={() => switchLocale("pt")}>
+                🇧🇷 Português
+              </DropdownMenuItem>
+              <DropdownMenuItem onClick={() => switchLocale("en")}>
+                🇺🇸 English
+              </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
 
@@ -62,5 +70,5 @@ export function Header() {
         </nav>
       </div>
     </header>
-  )
+  );
 }

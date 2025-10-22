@@ -1,16 +1,14 @@
-"use client"
+"use client";
 
-import { Button } from "@/components/ui/button"
-import { Header } from "@/components/header"
-import { Database, Code, Zap, Globe, AlertTriangle, Check } from "lucide-react"
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
-import { isConfigValid } from "@/lib/firebase"
-import { useTranslations } from "next-intl"
-import { Link } from "@/i18n/routing"
+import { Button } from "@/components/ui/button";
+import { Header } from "@/components/header";
+import { Database, Code, Zap, Globe, AlertTriangle, Check } from "lucide-react";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { isConfigValid } from "@/lib/firebase";
+import { Link } from "@/i18n/routing";
 
 export default function Home() {
-  const firebaseConfigured = isConfigValid()
-  const t = useTranslations("home")
+  const firebaseConfigured = isConfigValid();
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -23,7 +21,9 @@ export default function Home() {
               <Alert variant="destructive" className="bg-transparent border-0">
                 <AlertTriangle className="h-4 w-4" />
                 <AlertTitle>{t("firebaseWarning.title")}</AlertTitle>
-                <AlertDescription>{t("firebaseWarning.description")}</AlertDescription>
+                <AlertDescription>
+                  {t("firebaseWarning.description")}
+                </AlertDescription>
               </Alert>
             </div>
           </div>
@@ -32,7 +32,9 @@ export default function Home() {
         {/* Hero Section */}
         <section className="container mx-auto px-4 py-24 text-center">
           <div className="max-w-4xl mx-auto space-y-6">
-            <h1 className="text-5xl md:text-6xl font-bold leading-tight text-balance">{t("hero.title")}</h1>
+            <h1 className="text-5xl md:text-6xl font-bold leading-tight text-balance">
+              {t("hero.title")}
+            </h1>
             <p className="text-xl text-muted-foreground leading-relaxed max-w-2xl mx-auto text-pretty">
               {t("hero.subtitle")}
             </p>
@@ -43,7 +45,11 @@ export default function Home() {
                 </Button>
               </Link>
               <a href="#pricing">
-                <Button size="lg" variant="outline" className="text-lg px-8 bg-transparent">
+                <Button
+                  size="lg"
+                  variant="outline"
+                  className="text-lg px-8 bg-transparent"
+                >
                   {t("hero.learnMore")}
                 </Button>
               </a>
@@ -58,24 +64,36 @@ export default function Home() {
               <div className="h-12 w-12 rounded-lg bg-primary/10 flex items-center justify-center">
                 <Zap className="h-6 w-6 text-primary" />
               </div>
-              <h3 className="text-xl font-semibold">{t("features.step1.title")}</h3>
-              <p className="text-muted-foreground leading-relaxed">{t("features.step1.description")}</p>
+              <h3 className="text-xl font-semibold">
+                {t("features.step1.title")}
+              </h3>
+              <p className="text-muted-foreground leading-relaxed">
+                {t("features.step1.description")}
+              </p>
             </div>
 
             <div className="bg-card border border-border rounded-lg p-6 space-y-3">
               <div className="h-12 w-12 rounded-lg bg-accent/10 flex items-center justify-center">
                 <Database className="h-6 w-6 text-accent" />
               </div>
-              <h3 className="text-xl font-semibold">{t("features.step2.title")}</h3>
-              <p className="text-muted-foreground leading-relaxed">{t("features.step2.description")}</p>
+              <h3 className="text-xl font-semibold">
+                {t("features.step2.title")}
+              </h3>
+              <p className="text-muted-foreground leading-relaxed">
+                {t("features.step2.description")}
+              </p>
             </div>
 
             <div className="bg-card border border-border rounded-lg p-6 space-y-3">
               <div className="h-12 w-12 rounded-lg bg-primary/10 flex items-center justify-center">
                 <Code className="h-6 w-6 text-primary" />
               </div>
-              <h3 className="text-xl font-semibold">{t("features.step3.title")}</h3>
-              <p className="text-muted-foreground leading-relaxed">{t("features.step3.description")}</p>
+              <h3 className="text-xl font-semibold">
+                {t("features.step3.title")}
+              </h3>
+              <p className="text-muted-foreground leading-relaxed">
+                {t("features.step3.description")}
+              </p>
             </div>
 
             <div className="bg-card border border-border rounded-lg p-6 space-y-3">
@@ -93,7 +111,9 @@ export default function Home() {
         {/* How it works */}
         <section className="container mx-auto px-4 py-16">
           <div className="max-w-3xl mx-auto space-y-8">
-            <h2 className="text-3xl font-bold text-center">{t("features.title")}</h2>
+            <h2 className="text-3xl font-bold text-center">
+              {t("features.title")}
+            </h2>
 
             <div className="space-y-6">
               <div className="flex gap-4">
@@ -101,8 +121,12 @@ export default function Home() {
                   1
                 </div>
                 <div>
-                  <h3 className="text-xl font-semibold mb-2">{t("features.step1.title")}</h3>
-                  <p className="text-muted-foreground leading-relaxed">{t("features.step1.description")}</p>
+                  <h3 className="text-xl font-semibold mb-2">
+                    {t("features.step1.title")}
+                  </h3>
+                  <p className="text-muted-foreground leading-relaxed">
+                    {t("features.step1.description")}
+                  </p>
                 </div>
               </div>
 
@@ -111,8 +135,12 @@ export default function Home() {
                   2
                 </div>
                 <div>
-                  <h3 className="text-xl font-semibold mb-2">{t("features.step2.title")}</h3>
-                  <p className="text-muted-foreground leading-relaxed">{t("features.step2.description")}</p>
+                  <h3 className="text-xl font-semibold mb-2">
+                    {t("features.step2.title")}
+                  </h3>
+                  <p className="text-muted-foreground leading-relaxed">
+                    {t("features.step2.description")}
+                  </p>
                 </div>
               </div>
 
@@ -121,8 +149,12 @@ export default function Home() {
                   3
                 </div>
                 <div>
-                  <h3 className="text-xl font-semibold mb-2">{t("features.step3.title")}</h3>
-                  <p className="text-muted-foreground leading-relaxed">{t("features.step3.description")}</p>
+                  <h3 className="text-xl font-semibold mb-2">
+                    {t("features.step3.title")}
+                  </h3>
+                  <p className="text-muted-foreground leading-relaxed">
+                    {t("features.step3.description")}
+                  </p>
                 </div>
               </div>
             </div>
@@ -140,10 +172,16 @@ export default function Home() {
               {/* Free Plan */}
               <div className="bg-card border border-border rounded-lg p-8 space-y-6">
                 <div>
-                  <h3 className="text-2xl font-bold">{t("pricing.free.title")}</h3>
+                  <h3 className="text-2xl font-bold">
+                    {t("pricing.free.title")}
+                  </h3>
                   <div className="mt-4">
-                    <span className="text-4xl font-bold">{t("pricing.free.price")}</span>
-                    <span className="text-muted-foreground">{t("pricing.free.period")}</span>
+                    <span className="text-4xl font-bold">
+                      {t("pricing.free.price")}
+                    </span>
+                    <span className="text-muted-foreground">
+                      {t("pricing.free.period")}
+                    </span>
                   </div>
                 </div>
 
@@ -178,17 +216,25 @@ export default function Home() {
                 </div>
 
                 <div>
-                  <h3 className="text-2xl font-bold">{t("pricing.pro.title")}</h3>
+                  <h3 className="text-2xl font-bold">
+                    {t("pricing.pro.title")}
+                  </h3>
                   <div className="mt-4">
-                    <span className="text-4xl font-bold">{t("pricing.pro.price")}</span>
-                    <span className="text-muted-foreground">{t("pricing.pro.period")}</span>
+                    <span className="text-4xl font-bold">
+                      {t("pricing.pro.price")}
+                    </span>
+                    <span className="text-muted-foreground">
+                      {t("pricing.pro.period")}
+                    </span>
                   </div>
                 </div>
 
                 <ul className="space-y-3">
                   <li className="flex items-center gap-2">
                     <Check className="h-5 w-5 text-primary flex-shrink-0" />
-                    <span className="font-semibold">{t("pricing.pro.features.apis")}</span>
+                    <span className="font-semibold">
+                      {t("pricing.pro.features.apis")}
+                    </span>
                   </li>
                   <li className="flex items-center gap-2">
                     <Check className="h-5 w-5 text-primary flex-shrink-0" />
@@ -212,7 +258,9 @@ export default function Home() {
         <section className="container mx-auto px-4 py-16">
           <div className="max-w-3xl mx-auto bg-card border border-border rounded-lg p-12 text-center space-y-6">
             <h2 className="text-3xl font-bold">{t("hero.title")}</h2>
-            <p className="text-xl text-muted-foreground">{t("hero.subtitle")}</p>
+            <p className="text-xl text-muted-foreground">
+              {t("hero.subtitle")}
+            </p>
             <Link href="/register">
               <Button size="lg" className="text-lg px-8">
                 {t("hero.cta")}
@@ -228,5 +276,5 @@ export default function Home() {
         </div>
       </footer>
     </div>
-  )
+  );
 }

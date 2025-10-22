@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { db } from "@/lib/firebase";
-import { collection, query, where, getDocs, deleteDoc, doc, QueryDocumentSnapshot, DocumentData } from "firebase/firestore";
+import { collection, query, where, getDocs, addDoc, deleteDoc, doc, updateDoc, QueryDocumentSnapshot, DocumentData } from "firebase/firestore";
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
@@ -19,6 +19,44 @@ export async function GET(request: Request) {
     return NextResponse.json(apisData);
   } catch (error) {
     return NextResponse.json({ error: "Erro ao buscar APIs" }, { status: 500 });
+  }
+}
+
+export async function POST(request: Request) {
+  try {
+    const body = await request.json();
+    if (!body.userId || !body.name || !body.endpoint) {
+      return NextResponse.json({ error: "Campos obrigatórios faltando" }, { status: 400 });
+    }
+    const docRef = await addDoc(collection(db, "apis"), {
+      userId: body.userId,
+      name: body.name,
+      description: body.description || "",
+      endpoint: body.endpoint,
+      fields: body.fields || [],
+      createdAt: new Date(),
+    });
+    return NextResponse.json({ id: docRef.id }, { status: 201 });
+  } catch (error) {
+    return NextResponse.json({ error: "Erro ao criar API" }, { status: 500 });
+  }
+}
+
+export async function PUT(request: Request) {
+  const { searchParams } = new URL(request.url);
+  const apiId = searchParams.get("apiId");
+  try {
+    const body = await request.json();
+    if (!apiId) {
+      return NextResponse.json({ error: "apiId é obrigatório" }, { status: 400 });
+    }
+    await updateDoc(doc(db, "apis", apiId), {
+      ...body,
+      updatedAt: new Date(),
+    });
+    return NextResponse.json({ success: true });
+  } catch (error) {
+    return NextResponse.json({ error: "Erro ao atualizar API" }, { status: 500 });
   }
 }
 
