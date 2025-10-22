@@ -1,0 +1,176 @@
+{
+  "common": {
+    "loading": "Carregando...",
+    "error": "Erro",
+    "success": "Sucesso",
+    "cancel": "Cancelar",
+    "confirm": "Confirmar",
+    "delete": "Deletar",
+    "edit": "Editar",
+    "save": "Salvar",
+    "create": "Criar",
+    "back": "Voltar"
+  },
+  "header": {
+    "title": "Xingling API",
+    "dashboard": "Dashboard",
+    "pricing": "Preços",
+    "login": "Entrar",
+    "register": "Registrar",
+    "logout": "Sair"
+  },
+  "home": {
+    "hero": {
+      "title": "Crie APIs Fake em Segundos",
+      "subtitle": "Gere dados realistas para seus projetos de desenvolvimento. Defina sua estrutura, nós geramos os dados.",
+      "cta": "Começar Grátis",
+      "learnMore": "Saiba Mais"
+    },
+    "features": {
+      "title": "Como Funciona",
+      "step1": {
+        "title": "Defina Sua Estrutura",
+        "description": "Crie campos personalizados com tipos de dados como nome, email, data, etc."
+      },
+      "step2": {
+        "title": "Geramos os Dados",
+        "description": "Nossa engine gera automaticamente dados realistas baseados na sua estrutura."
+      },
+      "step3": {
+        "title": "Use Sua API",
+        "description": "Acesse seus dados via endpoints REST com suporte completo a CRUD."
+      }
+    },
+    "pricing": {
+      "title": "Preços Simples",
+      "free": {
+        "title": "Grátis",
+        "price": "R$ 0",
+        "period": "/mês",
+        "features": {
+          "apis": "2 APIs",
+          "requests": "Requisições ilimitadas",
+          "support": "Suporte da comunidade"
+        },
+        "cta": "Começar Grátis"
+      },
+      "pro": {
+        "title": "Pro",
+        "price": "R$ 2",
+        "period": "/mês",
+        "features": {
+          "apis": "APIs ilimitadas",
+          "requests": "Requisições ilimitadas",
+          "support": "Suporte prioritário"
+        },
+        "cta": "Fazer Upgrade"
+      }
+    },
+    "firebaseWarning": {
+      "title": "Configuração do Firebase Necessária",
+      "description": "Para usar o Xingling API, você precisa configurar as variáveis de ambiente do Firebase. Adicione suas credenciais do Firebase nas configurações do projeto."
+    }
+  },
+  "auth": {
+    "login": {
+      "title": "Entrar",
+      "subtitle": "Entre na sua conta para gerenciar suas APIs",
+      "email": "Email",
+      "password": "Senha",
+      "submit": "Entrar",
+      "noAccount": "Não tem uma conta?",
+      "register": "Registre-se",
+      "error": "Falha no login. Verifique suas credenciais."
+    },
+    "register": {
+      "title": "Criar Conta",
+      "subtitle": "Comece a criar suas APIs fake gratuitamente",
+      "name": "Nome",
+      "email": "Email",
+      "password": "Senha",
+      "submit": "Criar Conta",
+      "hasAccount": "Já tem uma conta?",
+      "login": "Entre",
+      "error": "Falha no registro. Tente novamente."
+    },
+    "firebaseError": {
+      "title": "Firebase Não Configurado",
+      "description": "O Firebase não está configurado corretamente. Configure as variáveis de ambiente do Firebase para habilitar a autenticação."
+    }
+  },
+  "dashboard": {
+    "title": "Minhas APIs",
+    "subtitle": "Gerencie e monitore suas APIs fake",
+    "createNew": "Nova API",
+    "empty": {
+      "title": "Nenhuma API ainda",
+      "description": "Crie sua primeira API fake para começar a gerar dados.",
+      "cta": "Criar Primeira API"
+    },
+    "plan": {
+      "current": "Plano Atual",
+      "free": "Grátis",
+      "pro": "Pro",
+      "usage": "APIs criadas",
+      "upgrade": "Fazer Upgrade para Pro"
+    },
+    "limitReached": {
+      "title": "Limite de APIs Atingido",
+      "description": "Você atingiu o limite de 2 APIs no plano gratuito. Faça upgrade para Pro para criar APIs ilimitadas por apenas R$ 2/mês."
+    },
+    "api": {
+      "endpoint": "Endpoint",
+      "createdAt": "Criado em",
+      "fields": "campos",
+      "copyEndpoint": "Copiar Endpoint",
+      "testApi": "Testar API",
+      "delete": "Deletar API",
+      "deleteConfirm": {
+        "title": "Tem certeza?",
+        "description": "Esta ação não pode ser desfeita. Isso irá deletar permanentemente sua API e remover os dados de nossos servidores."
+      }
+    },
+    "firebaseError": {
+      "title": "Firebase Não Configurado",
+      "description": "Configure as variáveis de ambiente do Firebase para usar o dashboard."
+    }
+  },
+  "newApi": {
+    "title": "Criar Nova API",
+    "subtitle": "Defina a estrutura dos seus dados fake",
+    "form": {
+      "name": "Nome da API",
+      "namePlaceholder": "Ex: users, products, posts",
+      "description": "Descrição",
+      "descriptionPlaceholder": "Descreva o propósito desta API",
+      "fields": "Campos",
+      "addField": "Adicionar Campo",
+      "fieldName": "Nome do Campo",
+      "fieldType": "Tipo",
+      "removeField": "Remover",
+      "submit": "Criar API",
+      "cancel": "Cancelar"
+    },
+    "types": {
+      "string": "Texto",
+      "number": "Número",
+      "boolean": "Booleano",
+      "date": "Data",
+      "email": "Email",
+      "name": "Nome",
+      "phone": "Telefone",
+      "address": "Endereço",
+      "url": "URL",
+      "uuid": "UUID"
+    },
+    "validation": {
+      "nameRequired": "Nome é obrigatório",
+      "fieldNameRequired": "Nome do campo é obrigatório",
+      "minFields": "Adicione pelo menos um campo"
+    },
+    "limitReached": {
+      "title": "Limite de APIs Atingido",
+      "description": "Você atingiu o limite de 2 APIs no plano gratuito. Faça upgrade para Pro para criar APIs ilimitadas."
+    }
+  }
+}

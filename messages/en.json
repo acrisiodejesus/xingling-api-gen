@@ -1,0 +1,176 @@
+{
+  "common": {
+    "loading": "Loading...",
+    "error": "Error",
+    "success": "Success",
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "delete": "Delete",
+    "edit": "Edit",
+    "save": "Save",
+    "create": "Create",
+    "back": "Back"
+  },
+  "header": {
+    "title": "Xingling API",
+    "dashboard": "Dashboard",
+    "pricing": "Pricing",
+    "login": "Login",
+    "register": "Sign Up",
+    "logout": "Logout"
+  },
+  "home": {
+    "hero": {
+      "title": "Create Fake APIs in Seconds",
+      "subtitle": "Generate realistic data for your development projects. Define your structure, we generate the data.",
+      "cta": "Get Started Free",
+      "learnMore": "Learn More"
+    },
+    "features": {
+      "title": "How It Works",
+      "step1": {
+        "title": "Define Your Structure",
+        "description": "Create custom fields with data types like name, email, date, etc."
+      },
+      "step2": {
+        "title": "We Generate the Data",
+        "description": "Our engine automatically generates realistic data based on your structure."
+      },
+      "step3": {
+        "title": "Use Your API",
+        "description": "Access your data via REST endpoints with full CRUD support."
+      }
+    },
+    "pricing": {
+      "title": "Simple Pricing",
+      "free": {
+        "title": "Free",
+        "price": "$0",
+        "period": "/month",
+        "features": {
+          "apis": "2 APIs",
+          "requests": "Unlimited requests",
+          "support": "Community support"
+        },
+        "cta": "Get Started Free"
+      },
+      "pro": {
+        "title": "Pro",
+        "price": "$2",
+        "period": "/month",
+        "features": {
+          "apis": "Unlimited APIs",
+          "requests": "Unlimited requests",
+          "support": "Priority support"
+        },
+        "cta": "Upgrade to Pro"
+      }
+    },
+    "firebaseWarning": {
+      "title": "Firebase Configuration Required",
+      "description": "To use Xingling API, you need to configure Firebase environment variables. Add your Firebase credentials in the project settings."
+    }
+  },
+  "auth": {
+    "login": {
+      "title": "Login",
+      "subtitle": "Sign in to your account to manage your APIs",
+      "email": "Email",
+      "password": "Password",
+      "submit": "Sign In",
+      "noAccount": "Don't have an account?",
+      "register": "Sign up",
+      "error": "Login failed. Please check your credentials."
+    },
+    "register": {
+      "title": "Create Account",
+      "subtitle": "Start creating your fake APIs for free",
+      "name": "Name",
+      "email": "Email",
+      "password": "Password",
+      "submit": "Create Account",
+      "hasAccount": "Already have an account?",
+      "login": "Sign in",
+      "error": "Registration failed. Please try again."
+    },
+    "firebaseError": {
+      "title": "Firebase Not Configured",
+      "description": "Firebase is not properly configured. Set up Firebase environment variables to enable authentication."
+    }
+  },
+  "dashboard": {
+    "title": "My APIs",
+    "subtitle": "Manage and monitor your fake APIs",
+    "createNew": "New API",
+    "empty": {
+      "title": "No APIs yet",
+      "description": "Create your first fake API to start generating data.",
+      "cta": "Create First API"
+    },
+    "plan": {
+      "current": "Current Plan",
+      "free": "Free",
+      "pro": "Pro",
+      "usage": "APIs created",
+      "upgrade": "Upgrade to Pro"
+    },
+    "limitReached": {
+      "title": "API Limit Reached",
+      "description": "You've reached the limit of 2 APIs on the free plan. Upgrade to Pro for unlimited APIs for just $2/month."
+    },
+    "api": {
+      "endpoint": "Endpoint",
+      "createdAt": "Created at",
+      "fields": "fields",
+      "copyEndpoint": "Copy Endpoint",
+      "testApi": "Test API",
+      "delete": "Delete API",
+      "deleteConfirm": {
+        "title": "Are you sure?",
+        "description": "This action cannot be undone. This will permanently delete your API and remove the data from our servers."
+      }
+    },
+    "firebaseError": {
+      "title": "Firebase Not Configured",
+      "description": "Set up Firebase environment variables to use the dashboard."
+    }
+  },
+  "newApi": {
+    "title": "Create New API",
+    "subtitle": "Define the structure of your fake data",
+    "form": {
+      "name": "API Name",
+      "namePlaceholder": "e.g., users, products, posts",
+      "description": "Description",
+      "descriptionPlaceholder": "Describe the purpose of this API",
+      "fields": "Fields",
+      "addField": "Add Field",
+      "fieldName": "Field Name",
+      "fieldType": "Type",
+      "removeField": "Remove",
+      "submit": "Create API",
+      "cancel": "Cancel"
+    },
+    "types": {
+      "string": "String",
+      "number": "Number",
+      "boolean": "Boolean",
+      "date": "Date",
+      "email": "Email",
+      "name": "Name",
+      "phone": "Phone",
+      "address": "Address",
+      "url": "URL",
+      "uuid": "UUID"
+    },
+    "validation": {
+      "nameRequired": "Name is required",
+      "fieldNameRequired": "Field name is required",
+      "minFields": "Add at least one field"
+    },
+    "limitReached": {
+      "title": "API Limit Reached",
+      "description": "You've reached the limit of 2 APIs on the free plan. Upgrade to Pro for unlimited APIs."
+    }
+  }
+}
