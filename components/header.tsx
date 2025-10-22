@@ -3,7 +3,6 @@
 import { useAuth } from "@/lib/auth-context";
 import { Button } from "@/components/ui/button";
 import { Database, LogOut, Languages } from "lucide-react";
-import { Link, useRouter, usePathname } from "@/i18n/routing";
 import {
   DropdownMenu,
   DropdownMenuContent,
