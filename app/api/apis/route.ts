@@ -28,6 +28,20 @@ export async function POST(request: Request) {
     if (!body.userId || !body.name || !body.endpoint) {
       return NextResponse.json({ error: "Campos obrigatórios faltando" }, { status: 400 });
     }
+    // Buscar plano do usuário
+    const userDoc = await getDocs(query(collection(db, "users"), where("uid", "==", body.userId)));
+    let userPlan: string = "free";
+    if (!userDoc.empty) {
+      const userData = userDoc.docs[0].data();
+      userPlan = userData.plan || "free";
+    }
+    // Contar APIs existentes
+    const apisSnapshot = await getDocs(query(collection(db, "apis"), where("userId", "==", body.userId)));
+    const apiCount = apisSnapshot.size;
+    if (userPlan === "free" && apiCount >= 2) {
+      return NextResponse.json({ error: "Limite de APIs gratuitas atingido. Faça upgrade para Pro." }, { status: 403 });
+    }
+    // Criar API
     const docRef = await addDoc(collection(db, "apis"), {
       userId: body.userId,
       name: body.name,

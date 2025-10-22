@@ -1,26 +1,47 @@
-"use client"
+"use client";
 
-import type React from "react"
+import type React from "react";
 
-import { useState, useEffect } from "react"
-import { useRouter } from "next/navigation"
-import { useAuth } from "@/lib/auth-context"
-import { db, isConfigValid } from "@/lib/firebase"
-import { collection, addDoc, serverTimestamp, query, where, getDocs, getDoc, doc } from "firebase/firestore"
-import { Header } from "@/components/header"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { Textarea } from "@/components/ui/textarea"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
-import { Plus, Trash2, Loader2, ArrowLeft, AlertCircle } from "lucide-react"
-import Link from "next/link"
+import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
+import { useAuth } from "@/lib/auth-context";
+import { db, isConfigValid } from "@/lib/firebase";
+import {
+  collection,
+  addDoc,
+  serverTimestamp,
+  query,
+  where,
+  getDocs,
+  getDoc,
+  doc,
+} from "firebase/firestore";
+import { Header } from "@/components/header";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { Plus, Trash2, Loader2, ArrowLeft, AlertCircle } from "lucide-react";
+import Link from "next/link";
 
 interface Field {
-  name: string
-  type: string
+  name: string;
+  type: string;
 }
 
 const FIELD_TYPES = [
@@ -34,132 +55,101 @@ const FIELD_TYPES = [
   { value: "url", label: "URL" },
   { value: "uuid", label: "UUID" },
   { value: "image", label: "Imagem URL" },
-]
+];
 
 export default function NewAPIPage() {
-  const { user, loading: authLoading } = useAuth()
-  const router = useRouter()
-  const [name, setName] = useState("")
-  const [description, setDescription] = useState("")
-  const [fields, setFields] = useState<Field[]>([{ name: "", type: "string" }])
-  const [loading, setLoading] = useState(false)
-  const [error, setError] = useState("")
-  const [userPlan, setUserPlan] = useState<"free" | "pro">("free")
-  const [apiCount, setApiCount] = useState(0)
-  const [checkingLimit, setCheckingLimit] = useState(true)
+  const { user, loading: authLoading } = useAuth();
+  const router = useRouter();
+  const [name, setName] = useState("");
+  const [description, setDescription] = useState("");
+  const [fields, setFields] = useState<Field[]>([{ name: "", type: "string" }]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+  const [userPlan, setUserPlan] = useState<"free" | "pro">("free");
 
   useEffect(() => {
     if (!authLoading && !user) {
-      router.push("/login")
+      router.push("/login");
     }
-  }, [user, authLoading, router])
+  }, [user, authLoading, router]);
 
-  useEffect(() => {
-    if (user) {
-      checkApiLimit()
-    }
-  }, [user])
+  const addField = (): void => {
+    setFields([...fields, { name: "", type: "string" }]);
+  };
 
-  const checkApiLimit = async () => {
-    if (!user || !db) {
-      setCheckingLimit(false)
-      return
-    }
-
-    try {
-      const userDoc = await getDoc(doc(db, "users", user.uid))
-      const plan = userDoc.exists() ? userDoc.data()?.plan || "free" : "free"
-      setUserPlan(plan)
-
-      const q = query(collection(db, "apis"), where("userId", "==", user.uid))
-      const querySnapshot = await getDocs(q)
-      setApiCount(querySnapshot.size)
-
-      if (plan === "free" && querySnapshot.size >= 2) {
-        router.push("/dashboard")
-      }
-    } catch (error) {
-      console.error("Error checking API limit:", error)
-    } finally {
-      setCheckingLimit(false)
-    }
-  }
-
-  const addField = () => {
-    setFields([...fields, { name: "", type: "string" }])
-  }
-
-  const removeField = (index: number) => {
+  const removeField = (index: number): void => {
     if (fields.length > 1) {
-      setFields(fields.filter((_, i) => i !== index))
+      setFields(fields.filter((_: Field, i: number) => i !== index));
     }
-  }
+  };
 
-  const updateField = (index: number, key: keyof Field, value: string) => {
-    const newFields = [...fields]
-    newFields[index][key] = value
-    setFields(newFields)
-  }
+  const updateField = (
+    index: number,
+    key: keyof Field,
+    value: string
+  ): void => {
+    const newFields = [...fields];
+    newFields[index][key] = value;
+    setFields(newFields);
+  };
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setError("")
-
-    if (!db) {
-      setError("Firebase não está configurado. Por favor, configure as variáveis de ambiente.")
-      return
-    }
-
-    if (userPlan === "free" && apiCount >= 2) {
-      setError("Você atingiu o limite de 2 APIs gratuitas. Faça upgrade para Pro.")
-      return
-    }
+  const handleSubmit = async (
+    e: React.FormEvent<HTMLFormElement>
+  ): Promise<void> => {
+    e.preventDefault();
+    setError("");
 
     if (!name.trim()) {
-      setError("Nome da API é obrigatório")
-      return
+      setError("Nome da API é obrigatório");
+      return;
     }
 
-    if (fields.some((f) => !f.name.trim())) {
-      setError("Todos os campos devem ter um nome")
-      return
+    if (fields.some((f: Field) => !f.name.trim())) {
+      setError("Todos os campos devem ter um nome");
+      return;
     }
 
-    const fieldNames = fields.map((f) => f.name.toLowerCase())
+    const fieldNames = fields.map((f: Field) => f.name.toLowerCase());
     if (new Set(fieldNames).size !== fieldNames.length) {
-      setError("Nomes de campos duplicados não são permitidos")
-      return
+      setError("Nomes de campos duplicados não são permitidos");
+      return;
     }
 
-    setLoading(true)
+    setLoading(true);
 
     try {
       const endpointId = name
         .toLowerCase()
         .replace(/[^a-z0-9]+/g, "-")
-        .replace(/^-|-$/g, "")
-
-      const endpoint = `${window.location.origin}/api/${endpointId}`
-
-      await addDoc(collection(db, "apis"), {
-        userId: user?.uid,
-        name,
-        description,
-        fields,
-        endpoint,
-        endpointId,
-        createdAt: serverTimestamp(),
-      })
-
-      router.push("/dashboard")
+        .replace(/^-|-$/g, "");
+      const endpoint = `${window.location.origin}/api/${endpointId}`;
+      const res = await fetch("/api/apis", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          userId: user?.uid,
+          name,
+          description,
+          fields,
+          endpoint,
+          endpointId,
+        }),
+      });
+      if (!res.ok) {
+        const data = await res.json();
+        setError(data.error || "Erro ao criar API");
+        setLoading(false);
+        return;
+      }
+      router.push("/dashboard");
     } catch (err: any) {
-      setError(err.message || "Erro ao criar API")
-      setLoading(false)
+      setError(err.message || "Erro ao criar API");
+      setLoading(false);
     }
-  }
+  };
 
-  if (authLoading || !user || checkingLimit) {
-    return null
+  if (authLoading || !user) {
+    return null;
   }
 
   if (!isConfigValid()) {
@@ -172,14 +162,14 @@ export default function NewAPIPage() {
               <AlertCircle className="h-4 w-4" />
               <AlertTitle>Firebase não configurado</AlertTitle>
               <AlertDescription>
-                As variáveis de ambiente do Firebase não estão configuradas. Por favor, configure o Firebase para criar
-                APIs.
+                As variáveis de ambiente do Firebase não estão configuradas. Por
+                favor, configure o Firebase para criar APIs.
               </AlertDescription>
             </Alert>
           </div>
         </main>
       </div>
-    )
+    );
   }
 
   return (
@@ -196,7 +186,9 @@ export default function NewAPIPage() {
             </Link>
             <div>
               <h1 className="text-3xl font-bold">Nova API</h1>
-              <p className="text-muted-foreground mt-1">Defina a estrutura da sua API fake</p>
+              <p className="text-muted-foreground mt-1">
+                Defina a estrutura da sua API fake
+              </p>
             </div>
           </div>
 
@@ -219,7 +211,9 @@ export default function NewAPIPage() {
                     id="name"
                     placeholder="Ex: Usuários, Produtos, Posts..."
                     value={name}
-                    onChange={(e) => setName(e.target.value)}
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                      setName(e.target.value)
+                    }
                     required
                     disabled={loading}
                   />
@@ -231,7 +225,9 @@ export default function NewAPIPage() {
                     id="description"
                     placeholder="Descreva o propósito desta API..."
                     value={description}
-                    onChange={(e) => setDescription(e.target.value)}
+                    onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
+                      setDescription(e.target.value)
+                    }
                     disabled={loading}
                     rows={3}
                   />
@@ -244,24 +240,36 @@ export default function NewAPIPage() {
                 <div className="flex items-center justify-between">
                   <div>
                     <CardTitle>Estrutura de Dados</CardTitle>
-                    <CardDescription>Defina os campos que sua API irá retornar</CardDescription>
+                    <CardDescription>
+                      Defina os campos que sua API irá retornar
+                    </CardDescription>
                   </div>
-                  <Button type="button" variant="outline" size="sm" onClick={addField} disabled={loading}>
+                  <Button
+                    type="button"
+                    variant="outline"
+                    size="sm"
+                    onClick={addField}
+                    disabled={loading}
+                  >
                     <Plus className="h-4 w-4 mr-2" />
                     Adicionar Campo
                   </Button>
                 </div>
               </CardHeader>
               <CardContent className="space-y-4">
-                {fields.map((field, index) => (
+                {fields.map((field: Field, index: number) => (
                   <div key={index} className="flex gap-3 items-start">
                     <div className="flex-1 space-y-2">
-                      <Label htmlFor={`field-name-${index}`}>Nome do Campo</Label>
+                      <Label htmlFor={`field-name-${index}`}>
+                        Nome do Campo
+                      </Label>
                       <Input
                         id={`field-name-${index}`}
                         placeholder="Ex: nome, email, idade..."
                         value={field.name}
-                        onChange={(e) => updateField(index, "name", e.target.value)}
+                        onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                          updateField(index, "name", e.target.value)
+                        }
                         required
                         disabled={loading}
                       />
@@ -271,7 +279,9 @@ export default function NewAPIPage() {
                       <Label htmlFor={`field-type-${index}`}>Tipo</Label>
                       <Select
                         value={field.type}
-                        onValueChange={(value) => updateField(index, "type", value)}
+                        onValueChange={(value: string) =>
+                          updateField(index, "type", value)
+                        }
                         disabled={loading}
                       >
                         <SelectTrigger id={`field-type-${index}`}>
@@ -323,5 +333,5 @@ export default function NewAPIPage() {
         </div>
       </main>
     </div>
-  )
+  );
 }
